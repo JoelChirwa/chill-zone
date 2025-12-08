@@ -5,13 +5,19 @@ import userRouter from './routes/user.route.js';
 import chatRouter from './routes/chat.route.js';
 import connectDB from './lib/db.js'; 
 import cookieParser from "cookie-parser"
+import cors from 'cors';
 import { protectRoute } from './middleware/auth.middleware.js';
 
 dotenv.config();
+  
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true, // Allow cookies to be sent from the frontend
+}));
 app.use(express.json());
 app.use(cookieParser());
 
