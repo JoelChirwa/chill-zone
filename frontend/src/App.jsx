@@ -9,12 +9,12 @@ import CallPage from "./pages/CallPage.jsx";
 import NotificationsPage from "./pages/NotificationsPage.jsx";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "./lib/axios.js";
+import PageLoader from "./components/PageLoader.jsx";
 
 const App = () => {
   const {
     data: authData,
     isLoading,
-    error,
   } = useQuery({
     queryKey: ["authUser"],
     queryFn: async () => {
@@ -25,6 +25,8 @@ const App = () => {
   });
 
   const authUser = authData?.user;
+
+  if (isLoading) return <PageLoader />;
 
   return (
     <>
